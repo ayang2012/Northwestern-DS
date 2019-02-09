@@ -1,0 +1,1202 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%matplotlib inline\n",
+    "from matplotlib import style\n",
+    "style.use('fivethirtyeight')\n",
+    "import matplotlib.pyplot as plt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import datetime as dt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Python SQL toolkit and Object Relational Mapper\n",
+    "import sqlalchemy\n",
+    "from sqlalchemy.ext.automap import automap_base\n",
+    "from sqlalchemy.orm import Session\n",
+    "from sqlalchemy import create_engine, func"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "engine = create_engine(\"sqlite:///Resources/hawaii.sqlite\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# reflect an existing database into a new model\n",
+    "Base = automap_base()\n",
+    "# reflect the tables\n",
+    "Base.prepare(engine, reflect=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# We can view all of the classes that automap found\n",
+    "Base.classes.keys()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Save references to each table\n",
+    "Measurement = Base.classes.measurement\n",
+    "Station = Base.classes.station"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Create our session (link) from Python to the DB\n",
+    "session = Session(engine)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "session.query(Measurement.columns)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "session.query(Measurement)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Python SQL toolkit and Object Relational Mapper\n",
+    "import sqlalchemy\n",
+    "from sqlalchemy.ext.automap import automap_base\n",
+    "from sqlalchemy.orm import Session\n",
+    "from sqlalchemy import create_engine, func, inspect"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inspect(Measurement)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inspect(Measurement.columns)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inspector = inspect(engine)\n",
+    "inspector.get_table_names(Measurement)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inspector = inspect(engine)\n",
+    "inspector.get_column_names()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inspector = inspect(engine)\n",
+    "inspector.get_table_names()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inspector = inspect(engine)\n",
+    "inspector.get_table_names()\n",
+    "inspector.get_column_names()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inspector = inspect(engine)\n",
+    "inspector.get_table_names()\n",
+    "inspector.get_columns()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inspector = inspect(engine)\n",
+    "inspector.get_table_names()\n",
+    "inspector.get_columns(Measurement)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inspector = inspect(engine)\n",
+    "inspector.get_table_names()\n",
+    "inspector.get_columns(measurement)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inspector = inspect(engine)\n",
+    "inspector.get_table_names()\n",
+    "inspector.get_columns('measurement')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inspector = inspect(engine)\n",
+    "inspector.get_table_names()\n",
+    "measurements = inspector.get_columns('measurement')\n",
+    "for feature in measurements:\n",
+    "    print(feature.name, feature.type)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "inspector = inspect(engine)\n",
+    "inspector.get_table_names()\n",
+    "measurements = inspector.get_columns('measurement')\n",
+    "for feature in measurements:\n",
+    "    print(feature['name'], feature['type'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "session.query(Measurement.id)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.today()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "date.today()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.today()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "session.query(Measurement.date > 2008)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "measurements = session.query(Measurement)\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date)\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date)\n",
+    "last_date\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date)\n",
+    "last_date\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date)\n",
+    "print(last_date)\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date)\n",
+    "for date in last_date:\n",
+    "    print(date)\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date).limit(5)\n",
+    "for date in last_date:\n",
+    "    print(date)\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date).limit(-5)\n",
+    "for date in last_date:\n",
+    "    print(date)\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date, ascending=True).limit(5)\n",
+    "for date in last_date:\n",
+    "    print(date)\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(desc(Measurement.date).limit(5)\n",
+    "for date in last_date:\n",
+    "    print(date)\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(desc(Measurement.date)).limit(5)\n",
+    "for date in last_date:\n",
+    "    print(date)\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc).limit(5)\n",
+    "for date in last_date:\n",
+    "    print(date)\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.Desc).limit(5)\n",
+    "for date in last_date:\n",
+    "    print(date)\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(5)\n",
+    "for date in last_date:\n",
+    "    print(date)\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 44,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "for date in last_date:\n",
+    "    print(date)\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date[0]\n",
+    "# measurements = session.query(Measurement).filter(Measurement.date )\n",
+    "# for measurement in measurements:\n",
+    "#     print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > last_date+365)\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > timedelta(days=365))\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 48,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.timedelta(days=365))\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 49,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date < dt.timedelta(days=365))\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 50,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date < dt.timedelta(days=365))\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 51,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date < (last_date-dt.timedelta(days=365))\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 52,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date < (last_date-dt.timedelta(days=365)))\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 53,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date < (last_date - dt.timedelta(days=365)))\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 54,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date - dt.timedelta(days=365)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date - 365"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 57,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date[0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 58,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date < (last_date[0] - dt.timedelta(days=365)))\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 59,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "datetime(last_date[0])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 60,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.last_date[0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 61,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.datetime(last_date[0])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 62,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.now()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 63,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "datetime.now()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 64,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import datetime as dt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 65,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "datetime.now()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 66,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.now()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 67,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.timedelts(days=365)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 68,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.timedelta(days=365)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 69,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.datetime('2010-01-01')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 70,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.datetime(2010-01-01)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 71,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.now()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 72,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date[0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 73,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.date(last_date[0])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 74,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.date(2010, 8, 3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 75,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.date(2010, 8, 3)-dt.timedelta(days=365)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 76,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.strptime(last_date[0, '%Y-%m-%d')#-dt.timedelta(days=365)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 77,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.strptime(last_date[0], '%Y-%m-%d')#-dt.timedelta(days=365)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 78,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.datetime.strptime(last_date[0], '%Y-%m-%d')#-dt.timedelta(days=365)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 79,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 80,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date < dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 81,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 82,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date, Measurement.prcp).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 83,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "df_prcp = pd.DataFrame(columns=['date', 'prcp'])\n",
+    "dates = []\n",
+    "prcp = []\n",
+    "for measurement in measurements:\n",
+    "    dates = dates.append(measurement.date)\n",
+    "    prcp = prcp.append(measurement.prcp)\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 84,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "df_prcp = pd.DataFrame(columns=['date', 'prcp'])\n",
+    "dates = []\n",
+    "prcps = []\n",
+    "for measurement in measurements:\n",
+    "    dates = dates.append(measurement.date)\n",
+    "    prcps = prcps.append(measurement.prcp)\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 85,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "df_prcp = pd.DataFrame(columns=['date', 'prcp'])\n",
+    "dates = []\n",
+    "prcps = []\n",
+    "for measurement in measurements:\n",
+    "    print(measurement.date)\n",
+    "    print(measurement.prcp)\n",
+    "    dates = dates.append(measurement.date)\n",
+    "    prcps = prcps.append(measurement.prcp)\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 86,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "df_prcp = pd.DataFrame(columns=['date', 'prcp'])\n",
+    "dates = []\n",
+    "prcps = []\n",
+    "for measurement in measurements:\n",
+    "    dates = dates.append(measurement.date)\n",
+    "    prcps = prcps.append(measurement.prcp)\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 87,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "df_prcp = pd.DataFrame(columns=['date', 'prcp'])\n",
+    "dates = []\n",
+    "prcps = []\n",
+    "for measurement in measurements:\n",
+    "    print(dates)\n",
+    "    dates = dates.append(measurement.date)\n",
+    "    prcps = prcps.append(measurement.prcp)\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 88,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "df_prcp = pd.DataFrame(columns=['date', 'prcp'])\n",
+    "dates = []\n",
+    "prcps = []\n",
+    "for measurement in measurements:\n",
+    "    dates.append(measurement.date)\n",
+    "    prcps.append(measurement.prcp)\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 89,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "df_prcp = pd.DataFrame(columns=['date', 'prcp'])\n",
+    "dates = []\n",
+    "prcps = []\n",
+    "for measurement in measurements:\n",
+    "    dates.append(measurement.date)\n",
+    "    prcps.append(measurement.prcp)\n",
+    "dates    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 90,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "df_prcp = pd.DataFrame(columns=['date', 'prcp'])\n",
+    "dates = []\n",
+    "prcps = []\n",
+    "for measurement in measurements:\n",
+    "    dates.append(measurement.date)\n",
+    "    prcps.append(measurement.prcp)\n",
+    "df_prcp['date']=dates\n",
+    "df_prcp['prcp']=prcps"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 91,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df_prcp.plot()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 92,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df_prcp.plot(kind='line')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 93,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df_prcp.plot(x='date', y='prcp', kind='line')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 94,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.plot(x=df_prcp['date'], y=df_prcp['prcp'], kind='line')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 95,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.plot(x=df_prcp['date'], y=df_prcp['prcp'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 96,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.plot(dates, y=prcps)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 97,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.plot(x=dates, y=prcps)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 98,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dates"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 99,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.plot(dates, prcps)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 100,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "df_prcp = pd.DataFrame(columns=['date', 'prcp'])\n",
+    "dates = []\n",
+    "prcps = []\n",
+    "for measurement in measurements:\n",
+    "    dates.append(measurement.date)\n",
+    "    prcps.append(measurement.prcp)\n",
+    "df_prcp['date']=dates\n",
+    "df_prcp['prcp']=prcps\n",
+    "df_prcp = df_prcp['date'].astype(datetime)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 101,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "df_prcp = pd.DataFrame(columns=['date', 'prcp'])\n",
+    "dates = []\n",
+    "prcps = []\n",
+    "for measurement in measurements:\n",
+    "    dates.append(measurement.date)\n",
+    "    prcps.append(measurement.prcp)\n",
+    "df_prcp['date']=dates\n",
+    "df_prcp['prcp']=prcps\n",
+    "df_prcp['date'] = df_prcp['date'].astype(datetime)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 102,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).limit(10)\n",
+    "last_date = last_date[0]\n",
+    "measurements = session.query(Measurement).filter(Measurement.date > dt.datetime.strptime(last_date[0], '%Y-%m-%d')-dt.timedelta(days=365))\n",
+    "df_prcp = pd.DataFrame(columns=['date', 'prcp'])\n",
+    "dates = []\n",
+    "prcps = []\n",
+    "for measurement in measurements:\n",
+    "    dates.append(measurement.date)\n",
+    "    prcps.append(measurement.prcp)\n",
+    "df_prcp['date']=dates\n",
+    "df_prcp['prcp']=prcps\n",
+    "df_prcp['date'] = pd.to_datetime(df_prcp['date'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 103,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.plot(df_prcp['date'], df_prcp['prcp'])"
+   ]
+  }
+ ],
+ "metadata": {},
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

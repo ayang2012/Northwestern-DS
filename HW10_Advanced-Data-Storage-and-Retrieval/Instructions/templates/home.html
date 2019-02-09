@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Available Routes</h1>
+<a href=http://127.0.0.1:5000/api/v1.0/precipitation>All Precipitation Data</a><br>
+<a href=http://127.0.0.1:5000/api/v1.0/stations>List of Stations</a><br>
+<a href=http://127.0.0.1:5000/api/v1.0/tobs>All Temperature Data</a><br>
+<hr>
+<p>Retrieve Temperature From Date Range"</p>
+<form action='range' method='get'>
+         Start Date:<br>
+         <input type='text' id='start_input' name='Start_' value='2016-01-20'><br>
+         End Date (optional):<br>
+         <input type='text' id='end_input' name='End'>
+         <input type='submit' id='button' value='Submit'>
+     </form>        
+<p>/api/v1.0/&lt;start&gt;</p>
+<p>/api/v1.0/&lt;start&gt;&lt;end&gt;<br></p>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+    $('#button').click(function(e) {
+        e.preventDefault()  
+        var inputvalue1 = $("#start_input").val();
+        var inputvalue2 = $("#end_input").val();
+        console.log(inputvalue1, inputvalue2);
+        window.location.replace("http://127.0.0.1:5000/api/v1.0/"+inputvalue1+"/"+inputvalue2);
+
+    });
+});
+</script> 
+</body>
+</html>
