@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Bootstrap Demo</title>
+
+  <!-- Bring in our bootstrap stylesheet -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+        <div class="container">
+            <button style="background-color:#30ada6; color:white; border:none; font-weight: bold; padding:10px">Lattitude</button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="plots.html">Plots
+                    <span class="sr-only">(current)</span>
+                    </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="comparison.html">Comparison</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="data.html">Data</a>
+            </li>
+            
+            </ul>
+        </div>
+        </div>
+    </nav>
+  
+</head>
+
+
+<body style="background-color:lightgray">
+
+  <!-- Creates the Overall Grid -->
+  <div class="container" style="background-color:white; margin-top:50px">
+
+    <!-- First Row -->
+    <div class="row" >
+
+      <!-- First (and only column) -->
+      <div class="col-md-12" style="margin-top:50px; margin-left:20px">
+        <h1 style="color:#30ada6">Comparison: Latitude vs X</h1>
+      </div>
+    </div>
+
+    <!-- Second Row -->
+    <div class="row">
+
+      <!-- First of two columns -->
+      <div class="col-md-6" style="margin-top:50px; margin-left:20px">
+        <p>Click any plot to get an in-depth analysis.</p>
+      </div>
+
+    <!--Seventh Row-->
+    <div class="row">
+      <!--First Column in this Row-->
+      <div class="col-md-5" style="margin-top:50px; margin-left:40px">
+        <div class="box">
+          <h3 align="center" style="color:#30ada6">vs. Max Temperature</h3>
+          <img src="Resources/assets/images/fig1.png" alt="My test image" width="450px"> 
+        </div>
+      </div>
+
+      <!--Second Column in this Row-->
+      <div class="col-md-5" style="margin-top:50px; margin-left:40px">
+        <div class="box">
+            <h3 align="center" style="color:#30ada6">vs. Humidity</h3>
+            <img src="Resources/assets/images/fig2.png" alt="My test image" width="450px"> 
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+            <!--First Column in this Row-->
+            <div class="col-md-5" style="margin-top:50px; margin-left:40px">
+              <div class="box">
+                <h3 align="center" style="color:#30ada6">vs. Cloudiness</h3>
+                <img src="Resources/assets/images/fig3.png" alt="My test image" width="450px"> 
+              </div>
+            </div>
+      
+            <!--Second Column in this Row-->
+            <div class="col-md-5" style="margin-top:50px; margin-left:40px">
+              <div class="box">
+                  <h3 align="center" style="color:#30ada6">vs. Wind Speed</h3>
+                  <img src="Resources/assets/images/fig4.png" alt="My test image" width="450px"> 
+              </div>
+            </div>
+          </div>
+
+    <!--Eighth Row-->
+
+  </div>
+
+</body>
+
+</html>
