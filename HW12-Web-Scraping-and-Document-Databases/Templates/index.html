@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Latest Mars New</h1> 
+        <p> {{ mars_data.mars_headeline }} </p>
+      </div>
+    </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <img src= "{{ mars_data.feature_image }}" object-fit="cover">
+        </div>
+        <div class="col-md-4">
+          <h5>Current Weather on Mars</h5>
+          <p>
+            {{ mars_data.twitter_weather }}
+          </p>
+          <h5>Mars Facts</h5>
+          {{ mars_data.space_table | safe}}
+        </div>
+      </div>
+      
+      <h1 style="text-align: center">Mars Hemispheres</h1>
+
+      <div class="row">
+        {% for i in range(mars_data.hemi_links | length) %} 
+          <div class="col-md-6">
+              <img src= "{{mars_data.hemi_links[i]}}" width=450px>
+              <h3>{{mars_data.hemi_titles[i]}}</h3>
+          </div>
+
+        {% endfor %}
+      </div>
+
+  </div>
+</body>
+
+</html>
+
