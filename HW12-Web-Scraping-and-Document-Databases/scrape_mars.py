@@ -58,7 +58,7 @@ def scrape():
     # hemisphere images
     a_image = []
     a_title = []
-    print(soup.find_all('h3'))
+    # print(soup.find_all('h3'))
     for i in range(4):#len(browser.find_by_css('h3'))):
         url_mars = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
         browser.visit(url_mars)
